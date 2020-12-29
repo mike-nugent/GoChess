@@ -1,3 +1,4 @@
 # GoChess
 
-# GoChess is a simple chess program written in golang.  It is a fully CLI based program that READS and plays chess using the Fen format. 
+## GoChess is a simple chess program written in golang.  
+This program features a simple CLI that READS and WRITES in FEN chess notation. 

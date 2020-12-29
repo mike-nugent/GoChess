@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -11,6 +12,28 @@ func TestCreateBoard(t *testing.T) {
 	if b == nil {
 		t.Error("Error creating board")
 	}
+}
+
+func TestGetPiece(t *testing.T) {
+	b := CreateBoard()
+	b.NewGame()
+
+	fmt.Println(b.GetPiece(b.Sqr("C1")).ToString())
+}
+
+func TestSqr(t *testing.T) {
+	b := CreateBoard()
+	s := b.Sqr("A1")
+	s2 := b.Sqr("B2")
+	s3 := b.Sqr("H8")
+	s4 := b.Sqr("H1")
+	s5 := b.Sqr("A8")
+	fmt.Println(s.toString())
+	fmt.Println(s2.toString())
+	fmt.Println(s3.toString())
+	fmt.Println(s4.toString())
+	fmt.Println(s5.toString())
+
 }
 
 func TestSquares(t *testing.T) {

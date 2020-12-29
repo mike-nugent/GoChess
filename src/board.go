@@ -32,17 +32,56 @@ func CreateBoard() *Board {
 		}
 	}
 
-	SetupPieces(&b)
+	b.Pieces = make(map[Square]Piece)
 	return &b
 }
 
-func SetupPieces(b *Board) {
+func (b *Board) NewGame() {
 	var whiteBishop Piece = &Bishop{Color: WHITE}
-	b.SetPiece(b.Sqr("A1"), &whiteBishop)
+	var blackBishop Piece = &Bishop{Color: BLACK}
+	// White
+	b.SetPiece(b.Sqr("A1"), nil)
+	b.SetPiece(b.Sqr("B1"), nil)
+	b.SetPiece(b.Sqr("C1"), &whiteBishop)
+	b.SetPiece(b.Sqr("D1"), nil)
+	b.SetPiece(b.Sqr("E1"), nil)
+	b.SetPiece(b.Sqr("F1"), &whiteBishop)
+	b.SetPiece(b.Sqr("G1"), nil)
+	b.SetPiece(b.Sqr("H1"), nil)
+
+	b.SetPiece(b.Sqr("A2"), nil)
+	b.SetPiece(b.Sqr("B2"), nil)
+	b.SetPiece(b.Sqr("C2"), nil)
+	b.SetPiece(b.Sqr("D2"), nil)
+	b.SetPiece(b.Sqr("E2"), nil)
+	b.SetPiece(b.Sqr("F2"), nil)
+	b.SetPiece(b.Sqr("G2"), nil)
+	b.SetPiece(b.Sqr("H2"), nil)
+
+	//Black
+	b.SetPiece(b.Sqr("A8"), nil)
+	b.SetPiece(b.Sqr("B8"), nil)
+	b.SetPiece(b.Sqr("C8"), &blackBishop)
+	b.SetPiece(b.Sqr("D8"), nil)
+	b.SetPiece(b.Sqr("E8"), nil)
+	b.SetPiece(b.Sqr("F8"), &blackBishop)
+	b.SetPiece(b.Sqr("G8"), nil)
+	b.SetPiece(b.Sqr("H8"), nil)
+
+	b.SetPiece(b.Sqr("A7"), nil)
+	b.SetPiece(b.Sqr("B7"), nil)
+	b.SetPiece(b.Sqr("C7"), nil)
+	b.SetPiece(b.Sqr("D7"), nil)
+	b.SetPiece(b.Sqr("E7"), nil)
+	b.SetPiece(b.Sqr("F7"), nil)
+	b.SetPiece(b.Sqr("G7"), nil)
+	b.SetPiece(b.Sqr("H7"), nil)
 }
 
 func (b *Board) SetPiece(s *Square, p *Piece) {
-	b.Pieces[*s] = *p
+	if p != nil {
+		b.Pieces[*s] = *p
+	}
 }
 
 func (b *Board) Sqr(name string) *Square {
@@ -57,12 +96,12 @@ func (b *Board) Sqr(name string) *Square {
 		os.Exit(1)
 	}
 	n := "ABCDEFGH"
-	col := strings.Index(n, colName)
+	col := strings.Index(n, colName) + 1
 	if col < 1 || col > 8 {
 		fmt.Println("Error, attempting to access col: ", col)
 		os.Exit(1)
 	}
-	return b.GetSquare(row, col+1)
+	return b.GetSquare(row, col)
 }
 
 func (b *Board) GetSquare(r int, c int) *Square {
@@ -114,7 +153,7 @@ func (b *Board) isEmpty(square *Square) bool {
 }
 
 func (b *Board) GetPiece(square *Square) Piece {
-	return nil // TODO - implement this
+	return b.Pieces[*square]
 }
 
 func (b *Board) isEnemyPieceOn(square *Square, piece Piece) bool {

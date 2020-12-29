@@ -1,5 +1,7 @@
 package main
 
+import "reflect"
+
 type Bishop struct {
 	Color string
 }
@@ -12,6 +14,9 @@ func (b *Bishop) ValidMoves(startSquare string) []string {
 }
 func (b *Bishop) GetColor() string {
 	return b.Color
+}
+func (b *Bishop) ToString() string {
+	return b.Color + reflect.TypeOf(b).Name()
 }
 
 /*

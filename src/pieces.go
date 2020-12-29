@@ -34,6 +34,7 @@ type Piece interface {
 	PieceType() int
 	ValidMoves(startSquare string) []string
 	GetColor() string
+	ToString() string
 }
 
 func GetPiece(str string, color string) int {
