@@ -32,7 +32,7 @@ const (
 
 type Piece interface {
 	PieceType() int
-	ValidMoves(startSquare string) []string
+	ValidMoves(startSquare *Square, board *Board) []Square
 	GetColor() string
 	ToString() string
 }

@@ -123,7 +123,7 @@ func (b *Board) Print() {
 	}
 }
 
-func (b *Board) getLine(piece *Piece, startingSquare *Square, rowInc int, colInc int) []Square {
+func (b *Board) getLine(color string, startingSquare *Square, rowInc int, colInc int) []Square {
 
 	var sqrs []Square
 	r := 0
@@ -137,7 +137,7 @@ func (b *Board) getLine(piece *Piece, startingSquare *Square, rowInc int, colInc
 			return sqrs
 		} else if b.isEmpty(s) {
 			sqrs = append(sqrs, *s)
-		} else if b.isEnemyPieceOn(s, *piece) {
+		} else if b.isEnemyPieceOn(s, color) {
 			sqrs = append(sqrs, *s)
 			return sqrs
 		} else {
@@ -156,10 +156,10 @@ func (b *Board) GetPiece(square *Square) Piece {
 	return b.Pieces[*square]
 }
 
-func (b *Board) isEnemyPieceOn(square *Square, piece Piece) bool {
+func (b *Board) isEnemyPieceOn(square *Square, color string) bool {
 	enemyPiece := b.GetPiece(square)
 	if enemyPiece != nil {
-		return enemyPiece.GetColor() != piece.GetColor()
+		return enemyPiece.GetColor() != color
 	}
 
 	return false

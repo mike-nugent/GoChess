@@ -9,7 +9,15 @@ type Bishop struct {
 func (b *Bishop) PieceType() int {
 	return BISHOP
 }
-func (b *Bishop) ValidMoves(startSquare string) []string {
+func (b *Bishop) ValidMoves(startSquare *Square, board *Board) []Square {
+
+	var line []Square
+	line = append(line, board.getLine(b.Color, startSquare, 1, 1)...)
+	line = append(line, board.getLine(b.Color, startSquare, -1, 1)...)
+	line = append(line, board.getLine(b.Color, startSquare, 1, -1)...)
+	line = append(line, board.getLine(b.Color, startSquare, -1, -1)...)
+
+	//TODO - sanity check each square and make sure it's both unique and not nil
 	return nil
 }
 func (b *Bishop) GetColor() string {
